@@ -10,6 +10,8 @@ from dataclasses import dataclass
 
 from src.components.data_transformation import DataTransformation
 from src.components.data_transformation import DataTransformationConfig
+from src.components.model_trainer import ModeltrainerConfig
+from src.components.model_trainer import Modeltrainer
 
 
 @dataclass
@@ -39,7 +41,7 @@ class DataIngestion:
 
             test_set.to_csv(self.ingestion_config.test_data_path,index=False,header=True)
 
-            logging.info("Inmgestion of the data iss completed")
+            logging.info("Ingestion of the data is completed")
 
             return(
                 self.ingestion_config.train_data_path,
@@ -55,3 +57,6 @@ if __name__=="__main__":
 
     data_transformation=DataTransformation()
     train_arr,test_arr,_=data_transformation.initiate_data_transformation(train_data,test_data)
+
+    modeltrainer = Modeltrainer()
+    print(modeltrainer.initiate_model_trainer(train_arr,test_arr))
